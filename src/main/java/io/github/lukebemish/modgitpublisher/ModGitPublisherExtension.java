@@ -20,9 +20,20 @@ public abstract class ModGitPublisherExtension {
     }
 
     public String getChangelog() {
-        try (Git git = Git.open(getChangelogFile().get().getAsFile().getParentFile())) {
+        try (Git git = Git.open(project.getRootDir())) {
             List<CommitMessage> messages = CommitAnalyzer.getCommitMessages(git);
             return "## " + getProjectName().get() + " " + project.getVersion()+"\n\n" + CommitMessage.getChangelog(messages);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public String getVersion() {
+        try (Git git = Git.open(project.getRootDir())) {
+            CommitAnalyzer.SemVerVersion oldVersion = CommitAnalyzer.getSemVerVersion(git,CommitAnalyzer.getNewestVersionedTag(git));
+            List<CommitMessage> messages = CommitAnalyzer.getCommitMessages(git);
+            CommitAnalyzer.SemVerVersion newVersion = CommitMessage.computeBumpedVersion(messages, oldVersion);
+            return newVersion.asGradleVersion();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -49,11 +49,15 @@ public record CommitMessage(CommitType type, String message, boolean breaking) {
         };
     }
 
-    public static CommitAnalyzer.SemVerVersion computeBumpedVersion(Collection<CommitMessage> messages, CommitAnalyzer.SemVerVersion original, String minecraftVersion) {
+    public static CommitAnalyzer.SemVerVersion computeBumpedVersion(Collection<CommitMessage> messages, CommitAnalyzer.SemVerVersion original) {
         if (messages.stream().anyMatch(CommitMessage::breaking))
             return original.bumpMajor();
         CommitType type = messages.stream().map(CommitMessage::type).reduce(CommitType.OTHER, CommitType::largerChange);
-        return type.bump.apply(original).withMinecraftVersion(minecraftVersion);
+        return type.bump.apply(original);
+    }
+
+    public static CommitAnalyzer.SemVerVersion computeBumpedVersion(Collection<CommitMessage> messages, CommitAnalyzer.SemVerVersion original, String minecraftVersion) {
+        return computeBumpedVersion(messages, original).withMinecraftVersion(minecraftVersion);
     }
 
     public static String getChangelog(List<CommitMessage> messages) {
