@@ -50,6 +50,8 @@ public record CommitMessage(CommitType type, String message, boolean breaking) {
     }
 
     public static CommitAnalyzer.SemVerVersion computeBumpedVersion(Collection<CommitMessage> messages, CommitAnalyzer.SemVerVersion original) {
+        if (messages.isEmpty())
+            return original;
         if (messages.stream().anyMatch(CommitMessage::breaking))
             return original.bumpMajor();
         CommitType type = messages.stream().map(CommitMessage::type).reduce(CommitType.OTHER, CommitType::largerChange);

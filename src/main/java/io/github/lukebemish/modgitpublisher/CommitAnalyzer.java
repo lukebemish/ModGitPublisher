@@ -64,7 +64,7 @@ public class CommitAnalyzer {
     }
 
     public static SemVerVersion getSemVerVersion(Git git, ObjectId objectId) throws MissingObjectException, GitAPIException {
-        var revCommit = git.nameRev().add(objectId).call();
+        var revCommit = git.nameRev().add(objectId).addPrefix("refs/tags/").call();
         return getSemVerVersion(revCommit.get(objectId));
     }
 
