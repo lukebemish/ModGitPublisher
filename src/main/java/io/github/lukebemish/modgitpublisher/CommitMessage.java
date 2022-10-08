@@ -42,7 +42,7 @@ public record CommitMessage(CommitType type, String message, boolean breaking) {
             case "FEAT!", "FEATURE!" -> new CommitMessage(CommitType.FEATURE, parts[1].trim(), true);
             case "FIX" -> new CommitMessage(CommitType.FIX, parts[1].trim(), false);
             case "FIX!" -> new CommitMessage(CommitType.FIX, parts[1].trim(), true);
-            case "CHORE" -> null;
+            case "CHORE", "IGNORED" -> null;
             case "REFACTOR", "DOCS", "STYLE" -> new CommitMessage(CommitType.MAINTENANCE, parts[1].trim(), false);
             case "REFACTOR!", "DOCS!", "STYLE!" -> new CommitMessage(CommitType.MAINTENANCE, parts[1].trim(), true);
             default -> new CommitMessage(CommitType.OTHER, parts[1].trim(), parts[0].endsWith("!"));
