@@ -1,0 +1,25 @@
+plugins {
+    id 'java-gradle-plugin'
+    id 'maven-publish'
+}
+
+group 'io.github.lukebemish.modgitpublisher'
+version '1.0.0'
+
+gradlePlugin {
+    plugins {
+        chasm {
+            id = 'io.github.lukebemish.modgitpublisher'
+            implementationClass = 'io.github.lukebemish.modgitpublisher.ModGitPublisherPlugin'
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+    gradlePluginPortal()
+}
+
+dependencies {
+    api 'org.eclipse.jgit:org.eclipse.jgit:[6.0,7.0)'
+}
