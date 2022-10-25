@@ -1,6 +1,6 @@
 package io.github.lukebemish.modgitpublisher;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.function.Function;
 

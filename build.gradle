@@ -21,5 +21,6 @@ repositories {
 }
 
 dependencies {
+    compileOnly 'org.jetbrains:annotations:23.0.0'
     api 'org.eclipse.jgit:org.eclipse.jgit:[6.0,7.0)'
 }
