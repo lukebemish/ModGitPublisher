@@ -3,14 +3,14 @@ plugins {
     id 'maven-publish'
 }
 
-group 'io.github.lukebemish.modgitpublisher'
+group 'dev.lukebemish.modgitpublisher'
 version '1.0.0'
 
 gradlePlugin {
     plugins {
         modgitpublisher {
-            id = 'io.github.lukebemish.modgitpublisher'
-            implementationClass = 'io.github.lukebemish.modgitpublisher.ModGitPublisherPlugin'
+            id = 'dev.lukebemish.modgitpublisher'
+            implementationClass = 'dev.lukebemish.modgitpublisher.ModGitPublisherPlugin'
         }
     }
 }
