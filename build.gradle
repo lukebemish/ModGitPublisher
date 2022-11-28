@@ -1,6 +1,8 @@
 plugins {
     id 'java-gradle-plugin'
     id 'maven-publish'
+    id 'com.gradle.plugin-publish' version '0.18.0'
+    id 'org.cadixdev.licenser' version '0.6.1'
 }
 
 group 'dev.lukebemish.modgitpublisher'
@@ -15,6 +17,15 @@ gradlePlugin {
     }
 }
 
+license {
+    header = project.file('header.txt')
+}
+
+pluginBundle {
+    website = 'https://github.com/lukebemish/ModGitPublisher'
+    vcsUrl = 'https://github.com/lukebemish/ModGitPublisher'
+}
+
 repositories {
     mavenCentral()
     gradlePluginPortal()
@@ -23,6 +34,14 @@ repositories {
 dependencies {
     compileOnly 'org.jetbrains:annotations:23.0.0'
     api 'org.eclipse.jgit:org.eclipse.jgit:[6.0,7.0)'
+}
+
+tasks.create('publishPluginToPersonalMaven') {
+    it.group = 'publishing'
+    it.dependsOn(
+            'publishPluginMavenPublicationToPersonalMavenRepository',
+            'publishModgitpublisherPluginMarkerMavenPublicationToPersonalMavenRepository'
+    )
 }
 
 publishing {
