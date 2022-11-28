@@ -1,4 +1,4 @@
-package io.github.lukebemish.modgitpublisher;
+package dev.lukebemish.modgitpublisher;
 
 import org.jetbrains.annotations.Nullable;
 import java.util.*;

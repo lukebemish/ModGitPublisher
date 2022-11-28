@@ -1,4 +1,4 @@
-package io.github.lukebemish.modgitpublisher;
+package dev.lukebemish.modgitpublisher;
 
 import org.eclipse.jgit.api.Git;
 import org.gradle.api.Project;
@@ -19,6 +19,7 @@ public abstract class ModGitPublisherExtension {
         this.project = project;
     }
 
+    @SuppressWarnings("unused")
     public String getChangelog() {
         try (Git git = Git.open(project.getRootDir())) {
             List<CommitMessage> messages = CommitAnalyzer.getCommitMessages(git);
@@ -28,6 +29,7 @@ public abstract class ModGitPublisherExtension {
         }
     }
 
+    @SuppressWarnings("unused")
     public String getVersion() {
         try (Git git = Git.open(project.getRootDir())) {
             CommitAnalyzer.SemVerVersion oldVersion = CommitAnalyzer.getSemVerVersion(git,CommitAnalyzer.getNewestVersionedTag(git));

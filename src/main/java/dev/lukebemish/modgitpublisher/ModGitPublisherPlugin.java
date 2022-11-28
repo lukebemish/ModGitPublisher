@@ -1,8 +1,9 @@
-package io.github.lukebemish.modgitpublisher;
+package dev.lukebemish.modgitpublisher;
 
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 
+@SuppressWarnings("unused")
 public class ModGitPublisherPlugin implements Plugin<Project> {
     @Override
     public void apply(Project project) {

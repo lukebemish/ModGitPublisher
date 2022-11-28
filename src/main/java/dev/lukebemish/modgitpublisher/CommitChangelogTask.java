@@ -1,4 +1,4 @@
-package io.github.lukebemish.modgitpublisher;
+package dev.lukebemish.modgitpublisher;
 
 import org.eclipse.jgit.api.Git;
 import org.gradle.api.DefaultTask;
