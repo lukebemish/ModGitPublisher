@@ -8,7 +8,7 @@ version '1.0.0'
 
 gradlePlugin {
     plugins {
-        chasm {
+        modgitpublisher {
             id = 'io.github.lukebemish.modgitpublisher'
             implementationClass = 'io.github.lukebemish.modgitpublisher.ModGitPublisherPlugin'
         }
