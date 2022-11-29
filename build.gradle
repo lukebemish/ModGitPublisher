@@ -48,7 +48,7 @@ publishing {
     repositories {
         maven {
             name = 'PersonalMaven'
-            url = uri('https://maven.lukebemish.dev/snapshots')
+            url = uri('https://maven.lukebemish.dev/releases')
             credentials {
                 username = findProperty('lukebemishMavenUser') ?: ''
                 password = findProperty('lukebemishMavenPassword') ?: ''
