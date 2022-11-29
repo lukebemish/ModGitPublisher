@@ -46,7 +46,6 @@ tasks.create('publishPluginToPersonalMaven') {
 
 publishing {
     repositories {
-        if (project)
         maven {
             name = 'PersonalMaven'
             url = uri('https://maven.lukebemish.dev/snapshots')
