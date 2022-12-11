@@ -36,12 +36,13 @@ public record CommitMessage(CommitType type, String message, boolean breaking) {
         if (message == null || message.isBlank())
             return null;
         String[] parts = message.split(":", 2);
-        if (parts.length != 2)
+        if (parts.length != 2 || !parts[0].matches("[a-zA-Z!]+")) {
+            if (parts[0].contains("\""))
+                return null;
             return new CommitMessage(CommitType.OTHER, message.trim(), false);
+        }
         if (parts[0].isBlank())
-            return new CommitMessage(CommitType.OTHER, parts[1].trim(), false);
-        if (!parts[0].matches("[a-zA-Z!]+"))
-            return new CommitMessage(CommitType.OTHER, message.trim(), false);
+            return null;
         return switch (parts[0].toUpperCase(Locale.ROOT)) {
             case "FEAT", "FEATURE" -> new CommitMessage(CommitType.FEATURE, parts[1].trim(), false);
             case "FEAT!", "FEATURE!" -> new CommitMessage(CommitType.FEATURE, parts[1].trim(), true);
