@@ -19,7 +19,7 @@ public class CommitChangelogTask extends DefaultTask {
             String toCommit = uncommitted.stream().filter(it->getProject().getRootProject().file(it).toPath().equals(path)).findFirst().orElse(null);
             if (toCommit != null) {
                 git.add().addFilepattern(toCommit).call();
-                git.commit().setMessage("CHORE: Automated changelog update").call();
+                git.commit().setSign(false).setMessage("CHORE: Automated changelog update").call();
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
