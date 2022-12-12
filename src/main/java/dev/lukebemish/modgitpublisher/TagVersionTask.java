@@ -19,7 +19,7 @@ public class TagVersionTask extends DefaultTask {
             CommitAnalyzer.SemVerVersion oldVersion = CommitAnalyzer.getSemVerVersion(git,CommitAnalyzer.getNewestVersionedTag(git));
             List<CommitMessage> messages = CommitAnalyzer.getCommitMessages(git);
             CommitAnalyzer.SemVerVersion newVersion = CommitMessage.computeBumpedVersion(messages, oldVersion, extension.getMinecraftVersion().get());
-            git.tag().setName(newVersion.asTag()).setForceUpdate(true).call();
+            git.tag().setSigned(false).setName(newVersion.asTag()).setForceUpdate(true).call();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
